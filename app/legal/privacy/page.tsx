@@ -6,7 +6,7 @@ export default function PrivacyPage() {
 
             <h2>1. Overview</h2>
             <p>
-                Coreframe ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclosure, and safeguard your information when you visit our website <strong>coreframe.digital</strong>.
+                Coreframe (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclosure, and safeguard your information when you visit our website <strong>coreframe.digital</strong>.
             </p>
 
             <h2>2. Data Controller</h2>

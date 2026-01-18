@@ -81,7 +81,7 @@ export default function CanvasEngine() {
                 ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
             } else {
                 // Fallback Placeholder Rendering
-                drawFallback(ctx, rect.width, rect.height, progress, frameIndex);
+                drawFallback(ctx, rect.width, rect.height, progress);
             }
 
             requestAnimationFrame(render);
@@ -102,7 +102,7 @@ export default function CanvasEngine() {
 }
 
 // Fallback Drawing Logic (Zoom Through -> Reveal Core)
-function drawFallback(ctx: CanvasRenderingContext2D, width: number, height: number, progress: number, frame: number) {
+function drawFallback(ctx: CanvasRenderingContext2D, width: number, height: number, progress: number) {
     const cx = width / 2;
     const cy = height / 2;
     const baseSize = Math.min(width, height) * 0.3;
