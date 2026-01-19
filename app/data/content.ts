@@ -18,7 +18,7 @@ export const teamMembers = [
 
 export const clients = [
     {
-        name: "PaderleG",
+        name: "Paderteg",
         logo: "/clients/paderleg.png",
         type: "WEBSITE",
         impact: "Engineered a high-performance corporate platform to streamline digital connectivity and infrastructure solutions."
