@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useScroll, useSpring } from 'framer-motion';
 
-const FRAME_COUNT = 120;
+
 
 export default function CanvasEngine() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
