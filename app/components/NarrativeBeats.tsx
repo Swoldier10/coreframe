@@ -5,17 +5,17 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 export default function NarrativeBeats() {
     const { scrollYProgress } = useScroll();
 
-    // Beat 1: Foundations (20-35%)
-    const opacity1 = useTransform(scrollYProgress, [0.15, 0.2, 0.35, 0.4], [0, 1, 1, 0]);
-    const x1 = useTransform(scrollYProgress, [0.15, 0.25], [-50, 0]);
+    // Beat 1: Foundations (10-25%)
+    const opacity1 = useTransform(scrollYProgress, [0.1, 0.15, 0.2, 0.25], [0, 1, 1, 0]);
+    const x1 = useTransform(scrollYProgress, [0.1, 0.2], [-50, 0]);
 
-    // Beat 2: Expansion (50-65%)
-    const opacity2 = useTransform(scrollYProgress, [0.45, 0.5, 0.65, 0.7], [0, 1, 1, 0]);
-    const x2 = useTransform(scrollYProgress, [0.45, 0.55], [50, 0]);
+    // Beat 2: Expansion (30-45%)
+    const opacity2 = useTransform(scrollYProgress, [0.3, 0.35, 0.4, 0.45], [0, 1, 1, 0]);
+    const x2 = useTransform(scrollYProgress, [0.3, 0.4], [50, 0]);
 
-    // Beat 3: Perfection (75-90%)
-    const opacity3 = useTransform(scrollYProgress, [0.7, 0.75, 0.9, 0.95], [0, 1, 1, 0]);
-    const x3 = useTransform(scrollYProgress, [0.7, 0.75], [-50, 0]);
+    // Beat 3: Perfection (50-65%)
+    const opacity3 = useTransform(scrollYProgress, [0.5, 0.55, 0.6, 0.65], [0, 1, 1, 0]);
+    const x3 = useTransform(scrollYProgress, [0.5, 0.6], [-50, 0]);
 
     return (
         <div className="absolute inset-0 pointer-events-none z-30 w-full h-full max-w-7xl mx-auto px-4 md:px-6">

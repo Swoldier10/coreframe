@@ -147,14 +147,21 @@ function drawFallback(ctx: CanvasRenderingContext2D, width: number, height: numb
         ctx.restore();
     }
 
-    // Phase 2: Core Emergence (0.3 - 1.0)
+    // Phase 2: Core Emergence (0.3 - 0.65)
     // The orange core grows from within as we zoom in
     if (progress > 0.3) {
+        // Stop rendering if fully exited
+        if (progress > 0.65) {
+            ctx.restore();
+            return;
+        }
+
         const coreProgress = (progress - 0.3) / 0.7; // 0 to 1
 
-        // Ambient Exit (0.9 - 1.0)
-        const isExit = progress > 0.9;
-        const exitProgress = isExit ? (progress - 0.9) / 0.1 : 0;
+        // Ambient Exit (0.6 - 0.65)
+        // Fade out rapidly before Team Section appears
+        const isExit = progress > 0.6;
+        const exitProgress = isExit ? (progress - 0.6) / 0.05 : 0;
 
         // Core rotation is slower/different to create depth
         ctx.rotate(-rotation * 0.5);
