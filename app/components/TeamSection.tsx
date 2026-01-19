@@ -2,35 +2,19 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const teamMembers = [
-    {
-        name: "Neculai Raul",
-        role: "Developer",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        name: "Vlasin Manuela",
-        role: "Developer",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        name: "Alex Pugna",
-        role: "Testing",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000&auto=format&fit=crop"
-    }
-];
+import { teamMembers } from '@/app/data/content';
 
 export default function TeamSection() {
     const { scrollYProgress } = useScroll();
 
-    // Beat 4: Team Section (70-85%)
-    // Fade in at 0.65, fully visible by 0.7
-    // Fade out at 0.8, fully invisible by 0.85
-    const opacity = useTransform(scrollYProgress, [0.65, 0.7, 0.8, 0.85], [0, 1, 1, 0]);
-    const y = useTransform(scrollYProgress, [0.65, 0.75], [50, 0]);
+    // Beat 4: Team Section (50-65%)
+    // Fade in at 0.5, fully visible by 0.55
+    // Fade out at 0.65, fully invisible by 0.7
+    const opacity = useTransform(scrollYProgress, [0.5, 0.55, 0.65, 0.7], [0, 1, 1, 0]);
+    const y = useTransform(scrollYProgress, [0.5, 0.6], [50, 0]);
 
     // Enable pointer events only when fully visible
-    const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.68 && v < 0.82 ? 'auto' : 'none'));
+    const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.52 && v < 0.68 ? 'auto' : 'none'));
 
     return (
         <motion.section

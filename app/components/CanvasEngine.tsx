@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useScroll, useSpring } from 'framer-motion';
 
 const FRAME_COUNT = 120;
@@ -9,41 +9,6 @@ export default function CanvasEngine() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { scrollYProgress } = useScroll();
     const smoothProgress = useSpring(scrollYProgress, { mass: 0.1, stiffness: 100, damping: 20 });
-
-    const [images, setImages] = useState<HTMLImageElement[]>([]);
-    const [imagesLoaded, setImagesLoaded] = useState(false);
-
-    // Preload Images (Placeholder logic included)
-    useEffect(() => {
-        const loadImages = async () => {
-            const loadedImages: HTMLImageElement[] = [];
-            const promises = [];
-
-            for (let i = 0; i < FRAME_COUNT; i++) {
-                const promise = new Promise<void>((resolve) => {
-                    const img = new Image();
-                    // In real app: `/sequence/sequence_${i.toString().padStart(3, '0')}.webp`
-                    // For now, we will fail to load and use fallback rendering
-                    img.src = `/sequence/sequence_${i.toString().padStart(3, '0')}.webp`;
-                    img.onload = () => {
-                        loadedImages[i] = img;
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        // Mark as null or handle missing
-                        resolve();
-                    };
-                });
-                promises.push(promise);
-            }
-
-            await Promise.all(promises);
-            setImages(loadedImages);
-            setImagesLoaded(true);
-        };
-
-        loadImages();
-    }, []);
 
     // Render Loop
     useEffect(() => {
@@ -66,30 +31,17 @@ export default function CanvasEngine() {
 
             // Determine Frame
             const progress = smoothProgress.get();
-            const frameIndex = Math.min(
-                FRAME_COUNT - 1,
-                Math.floor(progress * FRAME_COUNT)
-            );
 
-            // Render Image or Fallback
-            if (images[frameIndex]) {
-                const img = images[frameIndex];
-                // Draw image covering canvas while maintaining aspect ratio
-                const scale = Math.max(rect.width / img.width, rect.height / img.height);
-                const x = (rect.width / 2) - (img.width / 2) * scale;
-                const y = (rect.height / 2) - (img.height / 2) * scale;
-                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-            } else {
-                // Fallback Placeholder Rendering
-                drawFallback(ctx, rect.width, rect.height, progress);
-            }
+            // Render Fallback (Procedural Animations)
+            // We removed image loading stub code to clean up the file
+            drawFallback(ctx, rect.width, rect.height, progress);
 
             requestAnimationFrame(render);
         };
 
         const animationId = requestAnimationFrame(render);
         return () => cancelAnimationFrame(animationId);
-    }, [smoothProgress, images, imagesLoaded]);
+    }, [smoothProgress]);
 
     return (
         <canvas
@@ -147,21 +99,21 @@ function drawFallback(ctx: CanvasRenderingContext2D, width: number, height: numb
         ctx.restore();
     }
 
-    // Phase 2: Core Emergence (0.3 - 0.65)
+    // Phase 2: Core Emergence (0.3 - 0.5)
     // The orange core grows from within as we zoom in
     if (progress > 0.3) {
         // Stop rendering if fully exited
-        if (progress > 0.65) {
+        if (progress > 0.5) {
             ctx.restore();
             return;
         }
 
         const coreProgress = (progress - 0.3) / 0.7; // 0 to 1
 
-        // Ambient Exit (0.6 - 0.65)
+        // Ambient Exit (0.45 - 0.5)
         // Fade out rapidly before Team Section appears
-        const isExit = progress > 0.6;
-        const exitProgress = isExit ? (progress - 0.6) / 0.05 : 0;
+        const isExit = progress > 0.45;
+        const exitProgress = isExit ? (progress - 0.45) / 0.05 : 0;
 
         // Core rotation is slower/different to create depth
         ctx.rotate(-rotation * 0.5);

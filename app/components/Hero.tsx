@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
+import { heroContent } from '@/app/data/content';
+
 export default function Hero() {
     const { scrollYProgress } = useScroll();
     const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
@@ -16,27 +18,28 @@ export default function Hero() {
         >
             <div className="text-center space-y-6 max-w-4xl px-6">
                 <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-white mb-2">
-                    COREFRAME
+                    {heroContent.title}
                 </h1>
 
                 <div className="space-y-4 relative z-10">
                     <h2 className="text-xl md:text-3xl font-light tracking-[0.2em] text-core-orange uppercase drop-shadow-lg">
-                        Digital Architects
+                        {heroContent.subtitle}
                     </h2>
                     <p className="text-gray-200 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-md font-medium">
-                        We build the digital infrastructure that powers the next generation of business.
-                        <br className="hidden md:block" />
-                        From immersive flagships to complex enterprise systems.
+                        {heroContent.description}
                     </p>
                 </div>
 
                 <div className="pt-8 pb-12 relative z-10">
                     <div className="inline-flex items-center gap-4 md:gap-8 text-[10px] md:text-xs font-bold tracking-[0.2em] text-white bg-black/40 px-6 py-3 rounded-full border border-white/20 backdrop-blur-md shadow-2xl">
-                        <span>WEBSITES</span>
-                        <span className="text-core-orange">•</span>
-                        <span>PLATFORMS</span>
-                        <span className="text-core-orange">•</span>
-                        <span>MOBILE APPS</span>
+                        {heroContent.tags.map((tag, index) => (
+                            <span key={tag} className="flex items-center gap-4 md:gap-8">
+                                {tag}
+                                {index < heroContent.tags.length - 1 && (
+                                    <span className="text-core-orange">•</span>
+                                )}
+                            </span>
+                        ))}
                     </div>
                 </div>
 
